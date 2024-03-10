@@ -10,3 +10,19 @@ body {
   border: solid 5px #294189;
   border-radius: 2%;
 }
+
+.derechos {
+  opacity: 0.55;
+}
+
+@media only screen and (max-width: 1024px) {
+  body {
+    background-size: 50%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    background-size: 100%;
+  }
+}
