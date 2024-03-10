@@ -1,0 +1,12 @@
+body {
+  background-image: url("../img/pattern.jpg");
+  background-size: 30%;
+  color: white;
+}
+
+.login {
+  max-width: 500px;
+  background-color: #3954a4;
+  border: solid 5px black;
+  border-radius: 2%;
+}
