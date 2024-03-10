@@ -7,6 +7,6 @@ body {
 .login {
   max-width: 500px;
   background-color: #3954a4;
-  border: solid 5px black;
+  border: solid 5px #294189;
   border-radius: 2%;
 }
