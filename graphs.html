@@ -11,15 +11,71 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/graphs.css" />
+   
 </head>
-<body>
-    <div class="container d-flex align-items-center flex-column py-5">
-        <img
-          class="pb-5"
-          width="200px"
-          src="./img/Pokémon_Bank_logo.png"
-          alt="logo"
-        />
-    
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div id="header-container"></div> <!-- div creado solamente para que el js sepa donde colocar el header -->
+
+    <div class="container mt-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Análisis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Timeline</a>
+        </li>
+<!--         <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li> -->
+      </ul>
+      <div class="container-fluid mt-3">
+        <div class="row">
+          <div class="col-4" style="display: flex;">
+            <p class="label">Selección de la cuenta</p>
+          </div>
+          <div class=" col-8 dropdown-center">
+            <button class="btn btn-secodnary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              125871- Cliente nombre genérico
+            </button>
+          </div> 
+        </div>
+        <div class="container text-center">
+          <div class="row mb-3">
+            <div id="line-chart" class="col-9">
+              <canvas id="doughnutChart"></canvas>
+            </div>
+            <div class="col-3 article-card" style="color: black;">
+              <ul class="custom">
+                <li">
+                <p style="color: #ff6384;font-weight: bolder;">Depositos: $ <span id="depositos_valor"></span></p><br>
+                </li>
+                <li>
+                  <p style="color:#36a2eb; font-weight: bolder;">Retiros: $ <span id="retiros_valor"></span></p><br>
+                </li>
+                <li>
+                  <p style="color: #ffce56; font-weight: bolder;">Pagos: $ <span id="pagos_valor"></span></p><br>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
+<!-- <footer class="container text-center " style="color: black;">
+  Derechos reservados 2024, Compañía Pokémon Bank.
+</footer> -->
+<div id="footer-container" class="container-xxl text-center">
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/fetcher.js"></script>
+<script src="./js/chart1.js" type="module"></script>
+
 </html>
