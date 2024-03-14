@@ -1,0 +1,11 @@
+.nav-pokemon {
+    background-color: #eed635;
+}
+
+.text-pokemon-nav {
+    color: #24508b;
+}
+.nav-pokemon-active {
+    color:#e46a18;
+    font-weight: bolder;
+}
