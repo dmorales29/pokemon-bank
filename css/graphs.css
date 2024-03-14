@@ -1,0 +1,60 @@
+.label {
+    color: #151515;
+    font-weight: bolder;
+    font-size: larger;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    font-weight: bolder;
+}
+a:active {
+    color:#e46a18;
+    font-weight: bolder;
+}
+.nav.nav-tabs .nav-link {
+    color: black;
+}
+
+.nav.nav-tabs .nav-item.show .nav-link, 
+.nav.nav-tabs .nav-link.active {
+    color:dimgray; 
+    font-weight: bold;
+}
+
+.dropdown-toggle {
+    border-radius: 0;
+    border-color: #151515;
+    
+}
+.footer {
+    background-color:#eed635 ;
+    width: 100%;
+}
+.body{
+    display: flex;
+}
+
+.custom {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-card {
+    display: flex;
+    width:fit-content;
+    height: 50%;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+    margin-top: 20%;
+    padding-top: 2%;
+  }
+
+
+
