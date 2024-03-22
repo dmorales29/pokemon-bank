@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/graphs.css" />
    
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
   <div id="header-container"></div> <!-- div creado solamente para que el js sepa donde colocar el header -->
 
     <div class="container mt-3">
@@ -33,7 +33,7 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
       </ul>
-      <div class="container-fluid mt-3">
+      <div idclass="container-fluid mt-3">
         <div class="row">
           <div class="col-4" style="display: flex;">
             <p class="label">Selección de la cuenta</p>
@@ -46,10 +46,10 @@
         </div>
         <div class="container text-center">
           <div class="row mb-3">
-            <div id="line-chart" class="col-9">
+            <div id="line-chart" class="col-9" style="position: relative; height:80vh">
               <canvas id="doughnutChart"></canvas>
             </div>
-            <div class="col-3 article-card" style="color: black;">
+            <div class="col-4 article-card" style="color: black;">
               <ul class="custom">
                 <li">
                 <p style="color: #ff6384;font-weight: bolder;">Depositos: $ <span id="depositos_valor"></span></p><br>
@@ -66,13 +66,11 @@
         </div>
       </div>
     </div>
+    <div id="footer-container" class="container-xxl text-center"></div>
 </body>
 <!-- <footer class="container text-center " style="color: black;">
   Derechos reservados 2024, Compañía Pokémon Bank.
 </footer> -->
-<div id="footer-container" class="container-xxl text-center">
-
-</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./js/fetcher.js"></script>

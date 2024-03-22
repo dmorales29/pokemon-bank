@@ -36,29 +36,22 @@ var myDoughnutChart = new Chart(ctx, {
         labels: ["Deposito", "Retiro","Pago"],
         datasets: [{
             label: 'Transacciones',
-            // Datos reales para cada sección
             data: [d,r,p],
-            // Colores de fondo para cada sección
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)'
             ],
-            // Colores de borde para cada sección
             borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)'
             ],
-            // Ancho del borde de cada sección
             borderWidth: 1
         }]
     },
-    // Opciones de configuración del gráfico
     options: {
-        // Permitir que el gráfico sea responsive (se adapte al tamaño del contenedor)
         responsive: true,
-        // Configuración de plugins (en este caso, legend y title)
         plugins: {
             // Configuración de la leyenda
             legend: {
@@ -72,8 +65,13 @@ var myDoughnutChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: 'Mis transacciones'
+                text: 'Mis transacciones',
+                font : {
+                    size: 30,
+                }
             }
         }
     }
-});
+}
+
+);
