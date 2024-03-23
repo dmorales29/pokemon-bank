@@ -1,7 +1,31 @@
-.input-sm.form-control {
+/* .input-sm.form-control {
     width: 65%;
     height: auto;
-}
+} */
 body {
     color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+
+/* #to {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 0.5%;
+  }
+ */
+  .btn.btn-primary {
+    background-color:#e46a18;
+    border-color:#e46a18;
+  }
+
+  #boton{
+    text-align: start; 
+    padding-left: 5%;
+  }
+  .footer {
+    background-color:#eed635 ;
+    width: 100%;
 }

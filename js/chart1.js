@@ -1,13 +1,18 @@
+
+import { dataTableFormat } from './tabla.js';
 import  {getDatos, generarTransaccion, consolidar} from './transacciones.js';
 
+document.addEventListener('DOMContentLoaded', ()=>{
+const thisPage =window.location.pathname;
+if (thisPage.includes('graphs.html')) {
 const transacciones = []; //generar las dummy transactions
 
 for (let i = 0; i<15; i++) {
     transacciones.push(generarTransaccion());
 }
+//fin de generacion de dummy transsactions
 
 /* const datos = getDatos(transacciones); */
-
 const datos = consolidar(transacciones);
 let d = datos.deposito;
 let r = datos.retiro;
@@ -16,10 +21,10 @@ console.log(d);
 console.log(r);
 console.log(p);
 
-document.getElementById('depositos_valor').textContent = d;
-document.getElementById('retiros_valor').textContent = r;
-document.getElementById('pagos_valor').textContent = p;
-
+/* asignar valores a elementos que se muestran en la pantalla de graficos */
+    document.getElementById('depositos_valor').textContent = d;
+    document.getElementById('retiros_valor').textContent = r;
+    document.getElementById('pagos_valor').textContent = p;
 
 for (let index = 0; index < datos.length; index++) {
     console.log(transacciones[index]);
@@ -75,3 +80,5 @@ var myDoughnutChart = new Chart(ctx, {
 }
 
 );
+}
+});
