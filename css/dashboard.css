@@ -1,0 +1,8 @@
+body {
+    background-image: url("../img/pattern.jpg");
+    background-size: 30%;
+}
+
+.pikachu-img {
+    width: 400px;
+}
