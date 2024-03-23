@@ -1,0 +1,45 @@
+.text-pokemon-nav {
+    color: #000000;
+}
+
+.text-pokemon {
+    color: #000000;
+    font-weight: bolder;
+}
+
+.text-pokemon-nav:hover {
+    color: #e46a18;
+}
+
+a:active {
+    color:#e46a18;
+    font-weight: bolder;
+}
+
+.nav.nav-tabs .nav-item.show .nav-link, 
+.nav.nav-tabs .nav-link.active {
+    color:dimgray; 
+    font-weight: bold;
+}
+
+.dropdown-toggle {
+    border-radius: 0;
+    border-color: #151515;   
+}
+
+body {
+    background-image: url("../img/pattern.jpg");
+    background-size: 30%;
+}
+
+@media only screen and (max-width: 1024px) {
+    body {
+      background-size: 50%;
+    }
+}
+  
+  @media only screen and (max-width: 768px) {
+    body {
+      background-size: 100%;
+    }
+}
