@@ -3,5 +3,14 @@
 }
 
 .text-pokemon-nav {
-    color: #24508b;
+    color: #000000;
+}
+
+.text-pokemon-nav:hover {
+    color: #e46a18;
+}
+
+.nav-pokemon-active {
+    color:#e46a18;
+    font-weight: bolder;
 }
