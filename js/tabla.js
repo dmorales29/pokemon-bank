@@ -10,25 +10,43 @@ const formatoDate = (fechaISO) =>{
 
 export function dataTableFormat() {
     const table = document.getElementById('tablaTransacciones');
-    
-    for (let  i = 0; i < 15; i++) {
-        const transaccion = generarTransaccion();
-        const fila =table.insertRow();
-        const cellDate = fila.insertCell(0);
-        const cellTipo = fila.insertCell(1);
-        const cellMonto = fila.insertCell(2);
-        
-        cellDate.textContent = formatoDate(transaccion.fecha);
-        cellTipo.textContent = transaccion.tipo;
-        cellMonto.textContent = transaccion.monto;
-    }
-    
-}
+/*     const inicio = document.getElementById('start').value;
+    const final = document.getElementById('end').value;
+    console.log(inicio);
+    console.log(final); */
+/*     tbody =table.getElementsByTagName('tbody')[0];
+    console.log(tbody); */
+    table.innerHTML ='';
 
-document.addEventListener('DOMContentLoaded',() =>{
-    const botonFiltrar = document.getElementById('botonFiltrar');
-    if (botonFiltrar) {
-        botonFiltrar.addEventListener('click',dataTableFormat)
+        for (let  i = 0; i < 15; i++) {
+            const transaccion = generarTransaccion();
+            const fila =table.insertRow();
+            const cellDate = fila.insertCell(0);
+            const cellTipo = fila.insertCell(1);
+            const cellMonto = fila.insertCell(2);
+            
+            cellDate.textContent = formatoDate(transaccion.fecha);
+            cellTipo.textContent = transaccion.tipo;
+            cellMonto.textContent = transaccion.monto;
+        }
         
     }
-});
+    
+    document.addEventListener('DOMContentLoaded',() =>{
+        const botonFiltrar = document.getElementById('botonFiltrar');
+        if (botonFiltrar) {
+            botonFiltrar.addEventListener('click',dataTableFormat)
+            
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded',() =>{
+        const botonFiltrar_sm = document.getElementById('botonFiltrar-sm');
+        if (botonFiltrar_sm) {
+            botonFiltrar_sm.addEventListener('click',dataTableFormat)
+            
+        }
+    });
+    
+    
+   

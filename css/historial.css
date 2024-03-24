@@ -29,3 +29,18 @@ body {
     background-color:#eed635 ;
     width: 100%;
 }
+
+#datepicker-sm input {
+    width: 85%;
+}
+@media (max-width: 576px) {
+    #datepicker {
+        display: none;
+    }
+}
+@media (min-width: 576px) {
+    #datepicker-sm {
+        display: none;
+    }
+}
+
