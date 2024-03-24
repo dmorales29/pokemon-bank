@@ -12,21 +12,20 @@
     />
     <link rel="icon" href="img/pokemon_bank_logo_by_jormxdos_dffy7d5.png">
     <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/dashboard.css" />
     <link rel="stylesheet" href="./css/graphs.css" />
    
 </head>
 <body class="hold-transition sidebar-mini">
   <div id="header-container"></div> <!-- div creado solamente para que el js sepa donde colocar el header -->
 
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Análisis</a>
         </li>
-        <li class="nav-item">
+ <!--        <li class="nav-item">
           <a class="nav-link" href="#">Timeline</a>
-        </li>
+        </li> -->
 <!--         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
@@ -34,44 +33,69 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
       </ul>
-      <div class="container-fluid mt-3">
-        <div class="row">
+      <div  class="container-fluid mt-3">
+        <div id="info" class="row">
           <div class="col-4" style="display: flex;">
             <p class="label">Selección de la cuenta</p>
           </div>
-          <div class=" col-8 dropdown-center">
+          <div class="col-8 dropdown-center">
             <button class="btn btn-secodnary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               125871- Cliente nombre genérico
             </button>
           </div> 
         </div>
+<!--         <div id="info2" class="row">
+          <div class="container">
+            <div class="col-row" style="display: flex;">
+              <p class="label">Selección de la cuenta</p>
+            </div>
+            <div class="row dropdown-center" style="justify-content: center;">
+              <button id="drpdwn" class="btn btn-secodnary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                125871- Cliente nombre genérico
+              </button>
+            </div> 
+          </div>
+        </div> -->
+
         <div class="container text-center">
           <div class="row mb-3">
-            <div id="line-chart" class="col-9" style="position: relative; height:80vh">
-              <canvas id="doughnutChart"></canvas>
+            <div id="line-chart" class="col-12" >
+              <canvas id="doughnutChart" class="text-center"> </canvas>
+                <div class="img-container">
+                <img class="img-1"  src="./img/Charmander-PNG-Image.png" alt="Imagen" style="position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 25%; height: auto; ">
+                <img class="img-2" src="./img/Charmander-PNG-Photos.png" alt="Imagen" style="position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 25%; height: auto; ">
+              </div> 
+              
             </div>
-            <div class="col-4 article-card" style="color: black;">
-              <ul class="custom">
-                <li">
-                <p style="color: #ff6384;font-weight: bolder;">Depositos: $ <span id="depositos_valor"></span></p><br>
+<!--             <div id="line-chart-2" >
+              <canvas id="doughnutChart-sm" class="text-center"> </canvas>
+                <div>
+                <img src="./img/Snorlax-PNG-Pic.png" alt="Imagen" style="position: absolute; top: 55%; left: 39%; transform: translate(-50%, -50%); width: 25%; height: auto; ">
+              </div>
+              
+            </div> -->
+<!--             <div class="article-card">
+              <ul class="custom" title="Resumen de transacciones">
+                <li >
+                  <p class="" style="color:gray; font-weight:bold;">Resumen de transacciones</p>
                 </li>
                 <li>
-                  <p style="color:#36a2eb; font-weight: bolder;">Retiros: $ <span id="retiros_valor"></span></p><br>
+                <p  style="color: #ff6384;font-weight: bold;">Depositos: $ <span id="depositos_valor"></span></p><br>
                 </li>
                 <li>
-                  <p style="color: #ffce56; font-weight: bolder;">Pagos: $ <span id="pagos_valor"></span></p><br>
+                  <p style="color:#36a2eb; font-weight: bold;">Retiros: $ <span id="retiros_valor"></span></p><br>
+                </li>
+                <li>
+                  <p style="color: #ffce56; font-weight: bold;">Pagos: $ <span id="pagos_valor"></span></p><br>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
     <div class="container-fluid" id="footer-container" ></div>  
   </body>
-<!-- <footer class="container text-center " style="color: black;">
-  Derechos reservados 2024, Compañía Pokémon Bank.
-</footer> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./js/fetcher.js"></script>
