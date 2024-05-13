@@ -33,7 +33,46 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
       </ul>
-      <div  class="container-fluid mt-3">
+      <div class="row">
+        <div  style="color: black;">
+          <h1 id="user" class="mt-3" ></h1> </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="card mt-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title" style="color: black;">Ingresos</h5>
+              <h1 class="card-text mt-3" id="ingresos" style="color: black;"></h1>
+              <a href="#" class="card-link"></a>
+              <a href="#" class="card-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <div class="card mt-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title" style="color: black;">Egresos</h5>
+              <h1 class="card-text mt-3" id="egresos" style="color: black;"></h1>
+              <a href="#" class="card-link"></a>
+              <a href="#" class="card-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <div class="card mt-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title" style="color: black;">Saldo</h5>
+              <h1 class="card-text mt-3" id="saldos" style="color: black;"></h1>
+              <h6 id="sub-saldo" class="card-subtitle" style="color: black;"></h6>
+              <a href="#" class="card-link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<!--       <div  class="container-fluid mt-3">
         <div id="info" class="row">
           <div class="col-4" style="display: flex;">
             <p class="label">Selección de la cuenta</p>
@@ -43,7 +82,7 @@
               125871- Cliente nombre genérico
             </button>
           </div> 
-        </div>
+        </div> -->
 <!--         <div id="info2" class="row">
           <div class="container">
             <div class="col-row" style="display: flex;">
@@ -96,9 +135,12 @@
     </div>
     <div class="container-fluid" id="footer-container" ></div>  
   </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="./js/fetcher.js"></script>
 <script src="./js/chart1.js" type="module"></script>
+<script src="js/logOut.js"></script>
 
 </html>

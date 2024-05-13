@@ -1,0 +1,1 @@
+/* archivo placeholder para los scripts de la pantalla de acciones */

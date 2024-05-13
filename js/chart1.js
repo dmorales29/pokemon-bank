@@ -1,36 +1,63 @@
 
 import { dataTableFormat } from './tabla.js';
-import  {getDatos, generarTransaccion, consolidar} from './transacciones.js';
+import  {getDatos, generarTransaccion, consolidar,saldos} from './transacciones.js';
 
-document.addEventListener('DOMContentLoaded', ()=>{
-const thisPage =window.location.pathname;
-if (thisPage.includes('graphs.html')) {
-const transacciones = []; //generar las dummy transactions
 
-for (let i = 0; i<15; i++) {
-    transacciones.push(generarTransaccion());
-}
-//fin de generacion de dummy transsactions
-
-/* const datos = getDatos(transacciones); */
-const datos = consolidar(transacciones);
-let d = datos.deposito;
-let r = datos.retiro;
-let p = datos.pago;
-console.log(d);
-console.log(r);
-console.log(p);
-
-/* asignar valores a elementos que se muestran en la pantalla de graficos */
-/*     document.getElementById('depositos_valor').textContent = d;
-    document.getElementById('retiros_valor').textContent = r;
-    document.getElementById('pagos_valor').textContent = p; */
-
-for (let index = 0; index < datos.length; index++) {
-    console.log(transacciones[index]);
+document.addEventListener('DOMContentLoaded', (event)=>{
+   
+    event.preventDefault();
     
+const thisPage =window.location.pathname;
+if (thisPage.includes('graphs.html') ) {
+    
+    let storedData =localStorage.getItem('graphsData');
+
+    if(storedData !== null){
+        //validar si la data en localStorage ya existe, si ya existe solo se carga
+        try{
+            const data = JSON.parse(storedData);
+            initializePageWithData(data);
+        } catch (error){
+            console.error('Error al analicar JSON', error);
+        }
+        
+    }else{
+
+        //si no existe, se generan las dummy transactions, se guarda la info en localStorage 
+        //y luego se carga la info de la página
+        const transacciones = generateDummyTransactions();
+        localStorage.setItem('graphsData',JSON.stringify(transacciones));  
+        initializePageWithData(transacciones);
+        
+    }
 }
-const image = new Image();
+});
+
+function initializePageWithData(transacciones){
+    //funcion para cargar la info que esta en las cards, ingresos, egresos y saldo 
+    let userStoredData =JSON.parse(localStorage.getItem('userData'));
+    const amt = saldos(transacciones);
+    console.log(amt.ingresos);
+    const ingresos = document.getElementById("ingresos");
+    ingresos.textContent = "$ " + amt.ingresos.toFixed(2);
+    const egresos = document.getElementById("egresos");
+    egresos.textContent = "$ " + amt.egresos.toFixed(2);
+    const dispobible = document.getElementById("saldos");
+    dispobible.textContent = "$ " + amt.saldo.toFixed(2);
+    const userData = document.getElementById("user") ;
+    //información del usuario de la cuenta retrieved del localStorage userData
+    userData.textContent =  userStoredData.cuenta+ " - "+userStoredData.nombre;
+    //funcion para cargar la info en el pieChart
+    initializeCharts(transacciones);
+}
+function initializeCharts(transacciones){
+    //se usa la funcion consolidar, definida en el archivo transacciones para poder generar los datos
+    //para el pie chart
+    const datos = consolidar(transacciones);
+    let d = datos.deposito;
+    let r = datos.retiro;
+    let p = datos.pago;
+    const image = new Image();
 image.src = "";
 
 const plugin ={
@@ -54,7 +81,7 @@ var ctx = document.getElementById('doughnutChart').getContext('2d');
 
 // Crear el gráfico
 var myDoughnutChart = new Chart(ctx, {
-    type: 'doughnut', //tipo del grafico
+    type: 'doughnut',
     data: {
         labels: ["Deposito", "Retiro","Pago"],
         datasets: [{
@@ -77,7 +104,7 @@ var myDoughnutChart = new Chart(ctx, {
             responsive: true,
             plugins: {
             
-            // Configuración de la leyenda
+
             legend: {
                 display: true,
                 position: 'top',
@@ -111,53 +138,18 @@ var myDoughnutChart = new Chart(ctx, {
         }
     }
 });
-/* var ctxt =document.getElementById('doughnutChart-sm').getContext('2d');
-// Crear el gráfico
-var myDoughnutChart2 = new Chart(ctxt, {
-    type: 'doughnut', //tipo del grafico
-    data: {
-        // Etiquetas para cada sección del gráfico
-        labels: ["Deposito", "Retiro","Pago"],
-        datasets: [{
-            label: 'Transacciones',
-            data: [d,r,p],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            
-            // Configuración de la leyenda
-            legend: {
-                // Posición de la leyenda (en la parte superior)
-                display: true,
-                position: 'top',
-                labels: {
-                    color: 'rgb(0,0,0)',
-                    
-                }
-            },
-            title: {
-                text: 'Mis transacciones',
-                font : {
-                    size: 30,
-                }
-            },         
-        }
-    }
+
 }
 
-); */
+ //generar las dummy transactions
+function generateDummyTransactions(){
+    const transacciones = [];
+    for (let i = 0; i<15; i++) {
+        transacciones.push(generarTransaccion());
+        const saldo = saldos(transacciones);
+        if (saldo.egresos>saldo.ingresos) {
+            i=15;   
+        }
+    }
+    return transacciones;
 }
-});
