@@ -1,9 +1,10 @@
+/* Todo en este archivo es para generar las dummy transactions o para retrieve la info de las transacciones generadas */
 export function generarTransaccion(){
     const transacciones = ["Deposito","Retiro","Pago"]; //acciones que se pueden realizar, no se incluye mostrar saldo porque eso es solo una vista
     const colectores = ["Electricidad", "Agua","Internet","Teléfono","Otro"]; //para pagar servicios, se necesita saber el colector a quien se le va a pagar, agregue unos genericos
 
     const tipo = transacciones[Math.floor(Math.random()*transacciones.length)]; //random genera un numero entre 0y uno que se multiplica por la longitud del vector y floor lo convierte a un int para generar un index del vector y elegir un tipo de transaccion
-    const monto = Math.floor(Math.random()*1000)+1 ; //genera montons entre 0 y 100
+    const monto = Math.floor(Math.random()*100)+1 ;
     //inicializar objeto
     let transaccion = {
 
@@ -18,15 +19,6 @@ export function generarTransaccion(){
     return  transaccion;
 }
 
-/* const transacciones = [];
-for (let i = 0; i<15; i++) {
-    transacciones.push(generarTransaccion());
-    
-}
-/* for (let index = 0; index < transacciones.length; index++) {
-    console.log(transacciones[index]);
-    
-} */
 
 
 export function getDatos(transacciones ) {
@@ -44,7 +36,7 @@ export function getDatos(transacciones ) {
     }
 }
 
-
+//funcion que consolida los totales de depositos, retiros o pagos para poder mostrarlos en el pie chart 
 export function consolidar (transacciones){
     let deposito =0; 
     let retiro = 0; 
@@ -62,4 +54,25 @@ export function consolidar (transacciones){
         
     });
     return { deposito, retiro,pago}
+}
+export function saldos (transacciones){
+    //funcion para las cards que muestran ingresos, egresos y saldo final. el saldo inical se establece como
+    //que viene de la info de user data 500 por requerimientos de la ruta de aprendizaje
+    let userStoredData =JSON.parse(localStorage.getItem('userData'));
+    let egresos = 0; 
+    let saldoI=userStoredData.saldoI ;
+    let ingresos=+saldoI;
+    let saldo = 0;
+
+    transacciones.forEach(transaccion => {
+        if (transaccion.tipo=="Deposito") {
+            ingresos += transaccion.monto; 
+        } else if (transaccion.tipo == "Retiro" || transaccion.tipo == "Pago" ) {
+            egresos += transaccion.monto;
+            
+        }
+    });
+    saldo = saldoI + ingresos - egresos;
+
+    return { saldoI, ingresos, egresos,saldo}
 }

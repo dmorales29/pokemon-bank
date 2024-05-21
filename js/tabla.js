@@ -9,29 +9,31 @@ const formatoDate = (fechaISO) =>{
 }
 
 export function dataTableFormat() {
+    //funcion para llenar la tabla que muestra el historico de transacciones
     const table = document.getElementById('tablaTransacciones');
-/*     const inicio = document.getElementById('start').value;
-    const final = document.getElementById('end').value;
-    console.log(inicio);
-    console.log(final); */
-/*     tbody =table.getElementsByTagName('tbody')[0];
-    console.log(tbody); */
     table.innerHTML ='';
+    let transaccion = [];
+    transaccion = JSON.parse(localStorage.getItem('graphsData'));
 
-        for (let  i = 0; i < 15; i++) {
-            const transaccion = generarTransaccion();
+    var inicio =formatoDate(document.getElementById("start").value);
+    var fin =formatoDate(document.getElementById("end").value);
+
+    //filtra todas las transacciones retrieved del localStorage basadas en la fecha del datePicker
+    transaccion
+    .filter(element => new Date (formatoDate(element.fecha))>= new Date(inicio) && new Date(formatoDate(element.fecha))<= new Date(fin))
+    .forEach(element => {
+        //crea una fila para cada una de las transacciones retrieved del localStorage
             const fila =table.insertRow();
             const cellDate = fila.insertCell(0);
             const cellTipo = fila.insertCell(1);
             const cellMonto = fila.insertCell(2);
-            
-            cellDate.textContent = formatoDate(transaccion.fecha);
-            cellTipo.textContent = transaccion.tipo;
-            cellMonto.textContent = transaccion.monto;
-        }
-        
+            console.log(element.fecha);
+            cellDate.textContent = formatoDate(element.fecha);
+            cellTipo.textContent = element.tipo;
+            cellMonto.textContent = "$ "+element.monto.toFixed(2);
+    });  
     }
-    
+     
     document.addEventListener('DOMContentLoaded',() =>{
         const botonFiltrar = document.getElementById('botonFiltrar');
         if (botonFiltrar) {

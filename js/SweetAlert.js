@@ -1,4 +1,4 @@
-document.getElementById('loginId').addEventListener("click",function(event){
+/* document.getElementById('loginId').addEventListener("click",function(event){
   event.preventDefault();
   swal(
     "Error",
@@ -6,4 +6,4 @@ document.getElementById('loginId').addEventListener("click",function(event){
     "error"
   )
 })
-  
+   */
