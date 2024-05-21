@@ -1,16 +1,21 @@
 .nav-pokemon {
-    background-color: #eed635;
+  background-color: #eed635;
 }
 
 .text-pokemon-nav {
-    color: #000000;
+  color: #000000;
 }
 
 .text-pokemon-nav:hover {
-    color: #e46a18;
+  color: #e46a18;
 }
 
 .nav-pokemon-active {
-    color:#e46a18;
-    font-weight: bolder;
+  color: #e46a18;
+  font-weight: bolder;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #e46a18; /* Puedes cambiar esto a cualquier color que desees para indicar la página activa */
 }
