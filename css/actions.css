@@ -1,45 +1,76 @@
 .text-pokemon-nav {
-    color: #000000;
+  color: #000000;
 }
 
 .text-pokemon {
-    color: #000000;
-    font-weight: bolder;
+  color: #000000;
+  font-weight: bolder;
 }
 
 .text-pokemon-nav:hover {
-    color: #e46a18;
+  color: #e46a18;
 }
 
 a:active {
-    color:#e46a18;
-    font-weight: bolder;
+  color: #e46a18;
+  font-weight: bolder;
 }
 
-.nav.nav-tabs .nav-item.show .nav-link, 
+.nav.nav-tabs .nav-item.show .nav-link,
 .nav.nav-tabs .nav-link.active {
-    color:dimgray; 
-    font-weight: bold;
+  color: dimgray;
+  font-weight: bold;
 }
 
 .dropdown-toggle {
-    border-radius: 0;
-    border-color: #151515;   
+  border-radius: 0;
+  border-color: #151515;
 }
 
 body {
-    background-image: url("../img/pattern.jpg");
-    background-size: 30%;
+  background-image: url("../img/pattern.jpg");
+  background-size: 30%;
 }
 
 @media only screen and (max-width: 1024px) {
-    body {
-      background-size: 50%;
-    }
+  body {
+    background-size: 50%;
+  }
 }
-  
-  @media only screen and (max-width: 768px) {
-    body {
-      background-size: 100%;
-    }
+
+@media only screen and (max-width: 768px) {
+  body {
+    background-size: 100%;
+  }
+}
+
+.tab-content {
+  background-color: white;
+  margin: 0 0 16px 0 !important;
+  border: solid 1px #dee2e6;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+.container-tab {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-datos-cuenta {
+  margin: 16px 0;
+  flex-direction: row;
+  padding: 16px;
+  justify-content: center;
+  gap: 48px;
+  color: #666666;
+  box-sizing: content-box;
+}
+
+#montoADepositar::-webkit-outer-spin-button,
+#montoADepositar::-webkit-inner-spin-button,
+#montoARetirar::-webkit-outer-spin-button,
+#montoARetirar::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

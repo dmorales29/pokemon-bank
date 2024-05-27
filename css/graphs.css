@@ -150,6 +150,18 @@ a:active {
   width: 100%;
 }
 
+#egresos {
+  color: rgba(255, 99, 132, 1);
+}
+
+#ingresos {
+  color: rgba(54, 162, 235, 1);
+}
+
+#saldos {
+  color: rgba(11, 156, 49, 1);
+}
+
 /* @media (min-width: 576px) {
     #info2 {
         display: none;
