@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Cargamos el objeto de los servicios
     let servicios = JSON.parse(localStorage.getItem("servicios"));
     let dropdownServicio = document.getElementById("dropdownServicio");
-    console.log(servicios);
 
     //Desactivamos la option del dropdown
     if (servicios.aguaPagada === true) {
