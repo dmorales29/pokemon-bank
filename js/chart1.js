@@ -41,13 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
       tipo: "Pago",
       monto: 3.99,
       fecha: new Date("2024-05-20T00:16:31.750Z").toISOString(),
-      colector: "Agua Potable",
     },
     {
       tipo: "Pago",
       monto: 25.6,
       fecha: new Date("2024-05-20T00:16:42.750Z").toISOString(),
-      colector: "Internet",
     },
     {
       tipo: "Deposito",
@@ -61,14 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  // Comprobamos si el flag "dataCargada" ya existe en localStorage
-  if (localStorage.getItem("dataCargada") === null) {
+  // Comprobamos si el flag "transaccionesCargada" ya existe en localStorage
+  if (localStorage.getItem("transaccionesCargada") === null) {
     // Si no existe, lo establecemos como "false"
-    localStorage.setItem("dataCargada", "false");
+    localStorage.setItem("transaccionesCargada", "false");
   }
 
   //Convertir a booleano
-  let flag = localStorage.getItem("dataCargada") === "true";
+  let flag = localStorage.getItem("transaccionesCargada") === "true";
 
   if (!flag) {
     function cargarData() {
@@ -79,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let ingresos = 0;
       let egresos = 0;
       let saldo = 0;
-      let dataCargada = true;
+      let transaccionesCargada = true;
 
       //Hacemos el cálculo y asignamos
       transacciones.forEach((transaccion) => {
@@ -115,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       //Actualizar flag localStorage
-      localStorage.setItem("dataCargada", "true");
+      localStorage.setItem("transaccionesCargada", "true");
     }
 
     //Cargar data una vez

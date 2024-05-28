@@ -4,11 +4,7 @@ let storedData = localStorage.getItem("graphsData");
 function loguear() {
   let acc = document.getElementById("accountNumber").value;
   let pin = document.getElementById("inputPassword").value;
-  console.log(typeof acc);
-  console.log(typeof pin);
 
-  console.log(acc);
-  console.log(pin);
   if (acc == userP.cuenta && pin === userP.PIN) {
     console.log("logueado");
     window.location.href = "mis-finanzas.html";

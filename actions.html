@@ -173,22 +173,32 @@
                   >
                   <select
                     class="form-select"
+                    id="dropdownServicio"
                     aria-label="Default select example"
                   >
                     <option hidden selected>
                       Selecciona el servicio a pagar
                     </option>
-                    <option value="1">Servicio de Agua Potable</option>
-                    <option value="2">Servicio de Energía Electrica</option>
-                    <option value="3">Servicio de Telefonía</option>
-                    <option value="4">Servicio de Internet</option>
+                    <option value="1">Servicio de Agua Potable - $18.95</option>
+                    <option value="2">
+                      Servicio de Energía Electrica - $65.82
+                    </option>
+                    <option value="3">Servicio de Telefonía - $5.99</option>
+                    <option value="4">Servicio de Internet - $31.50</option>
                   </select>
+                </div>
+                <div class="mb-3 hide" id="amountPlaceholder">
+                  <label class="form-label text-pokemon">Monto a Pagar</label>
+                  <div class="monto">
+                    <p>$</p>
+                    <p class="cantidad" id="montoCantidad"></p>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <button
-                    type="button"
-                    onclick="sendService()"
                     class="btn btn-primary"
+                    id="submitPagar"
+                    type="button"
                   >
                     Pagar
                   </button>
@@ -212,20 +222,4 @@
   <script src="./js/fetcher.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/logOut.js"></script>
-
-  <script>
-    function sendService() {
-      swal({
-        title: "Pago Exitoso",
-        icon: "success",
-        button: {
-          text: "Aceptar",
-          value: true,
-          visible: true,
-          className: "btn btn-primary",
-          closeModal: true,
-        },
-      });
-    }
-  </script>
 </html>

@@ -74,3 +74,19 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.monto {
+  color: #666666;
+  font-weight: 700;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}

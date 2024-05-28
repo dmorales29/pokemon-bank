@@ -8,6 +8,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Carga del localStorage las transacciones
   let misTransacciones = JSON.parse(localStorage.getItem("misTransacciones"));
+
+  // Comprobamos si el flag "serviciosAPagar" ya existe en localStorage
+  if (localStorage.getItem("serviciosAPagar") === null) {
+    // Si no existe, lo establecemos como "false"
+    localStorage.setItem("serviciosAPagar", "false");
+  }
+
+  //Convertir a booleano
+  let flag = localStorage.getItem("serviciosAPagar") === "true";
+
+  if (!flag) {
+    function cargarServicios() {
+      //Creamos objeto de los servicios a pagar
+      let servicios = {
+        aguaPagada: false,
+        energiaPagada: false,
+        telefonoPagada: false,
+        internetPagada: false,
+      };
+
+      //Guardamos en el localStorage los servicios a pagar
+      localStorage.setItem("servicios", JSON.stringify(servicios));
+
+      //Actualizar flag localStorage
+      localStorage.setItem("serviciosAPagar", "true");
+    }
+
+    //Cargamos una vez
+    cargarServicios();
+  } else {
+    //Si hace refresh de la página y ya están pagados, deshabilita las opciones
+    //Cargamos el objeto de los servicios
+    let servicios = JSON.parse(localStorage.getItem("servicios"));
+    let dropdownServicio = document.getElementById("dropdownServicio");
+    console.log(servicios);
+
+    //Desactivamos la option del dropdown
+    if (servicios.aguaPagada === true) {
+      dropdownServicio.options[1].disabled = "true";
+    }
+    if (servicios.energiaPagada === true) {
+      dropdownServicio.options[2].disabled = "true";
+    }
+    if (servicios.telefonoPagada === true) {
+      dropdownServicio.options[3].disabled = "true";
+    }
+    if (servicios.internetPagada === true) {
+      dropdownServicio.options[4].disabled = "true";
+    }
+  }
   //////////////////////// FIN - Cargar localStorage ////////////////////////
 
   ///////////// INICIO - Formateo de datos a depositar /////////////
@@ -171,6 +221,12 @@ document.addEventListener("DOMContentLoaded", () => {
       //Hacemos push de la transacción al localStorage para no borrar la data
       misTransacciones.push(nuevaTransaccion);
 
+      //Guardamos la transacción en el localStorage
+      localStorage.setItem(
+        "misTransacciones",
+        JSON.stringify(misTransacciones)
+      );
+
       //Resta del egreso anterior menos el retiro realizado
       let nuevoEgreso = totalMovimientos.egresos + montoARetirar;
 
@@ -218,6 +274,236 @@ document.addEventListener("DOMContentLoaded", () => {
       icon: "success",
     });
   }
+  //////////////////////// FIN - Consultar Saldo ////////////////////////
+
+  //////////////////////// INICIO - Pagar Servicios ////////////////////////
+  //Seleccionar el servicio a pagar
+  let dropdownServicio = document.getElementById("dropdownServicio");
+  let amountPlaceholder = document.getElementById("amountPlaceholder");
+  let montoCantidad = document.getElementById("montoCantidad");
+  let submitPagar = document.getElementById("submitPagar");
+
+  //Agregamos el listener al dropdown
+  dropdownServicio.addEventListener("change", dropdownContent);
+
+  //Función para cambiar el tipo de servicio a pagar
+  function dropdownContent() {
+    switch (dropdownServicio.selectedIndex) {
+      case 1:
+        amountPlaceholder.classList.add("show");
+        montoCantidad.innerHTML = "18.95";
+        break;
+      case 2:
+        amountPlaceholder.classList.add("show");
+        montoCantidad.innerHTML = "65.82";
+        break;
+      case 3:
+        amountPlaceholder.classList.add("show");
+        montoCantidad.innerHTML = "5.99";
+        break;
+      case 4:
+        amountPlaceholder.classList.add("show");
+        montoCantidad.innerHTML = "31.50";
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  //Agregamos el listener al botón submitPagar
+  submitPagar.addEventListener("click", pagarServicio);
+
+  //Pagar servicio y bloquear opción
+  function pagarServicio() {
+    let datoMontoCantidad = montoCantidad.innerHTML;
+
+    // Mostramos un modal con SweetAlert indicando que tiene saldo insuficiente
+    if (totalMovimientos.saldo === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Saldo insuficiente",
+        text: "No tienes los fondos necesarios para retirar este monto.",
+      });
+    } else if (dropdownServicio.selectedIndex === 0) {
+      // Mostramos un modal con SweetAlert indicando que no ha seleccionado opción
+      Swal.fire({
+        icon: "error",
+        title: "Seleccionar Servicio",
+        text: "Debes seleccionar un servicio a pagar.",
+      });
+    } else {
+      //Realizamos el pago si todo esta bien
+      //Resta del saldo anterior con el pago realizado
+      let nuevoSaldo = totalMovimientos.saldo - datoMontoCantidad;
+      totalMovimientos.saldo = nuevoSaldo;
+
+      //Convertimos el monto a tipo número
+      let datoMontoCantidadNumero = Number(datoMontoCantidad);
+
+      //Registro de transacción de pago
+      let nuevaTransaccion = {
+        tipo: "Pago",
+        monto: datoMontoCantidadNumero,
+        fecha: new Date().toISOString(),
+      };
+
+      //Hacemos push de la transacción al localStorage para no borrar la data
+      misTransacciones.push(nuevaTransaccion);
+
+      //Guardamos la transacción en el localStorage
+      localStorage.setItem(
+        "misTransacciones",
+        JSON.stringify(misTransacciones)
+      );
+
+      //Resta del egreso anterior menos el pago realizado
+      let nuevoEgreso = totalMovimientos.egresos + datoMontoCantidadNumero;
+
+      //Asignamos el valor del egreso en el localStorage
+      totalMovimientos.egresos = nuevoEgreso;
+
+      //Asignamos el valor del nuevo saldo en el localStorage
+      totalMovimientos.saldo = nuevoSaldo;
+
+      //Guardamos el nuevo saldo en el localStorage
+      localStorage.setItem(
+        "totalMovimientos",
+        JSON.stringify(totalMovimientos)
+      );
+
+      //Limpiamos cantidad y bloqueamos la selección del servicio pagado
+      switch (dropdownServicio.selectedIndex) {
+        case 1:
+          //Desactivamos la option del dropdown
+          dropdownServicio.options[dropdownServicio.selectedIndex].disabled =
+            "true";
+
+          //Quitamos la selección
+          dropdownServicio.selectedIndex = 0;
+
+          //Removemos la clase para mostrar la cantidad
+          amountPlaceholder.classList.remove("show");
+
+          //Agregamos la clase para esconder la cantidad
+          amountPlaceholder.classList.add("hide");
+
+          //Cargamos el localStorage de lo que se ha pagado
+          let servicioAguaPagado = JSON.parse(
+            localStorage.getItem("servicios")
+          );
+
+          //Cambiamos a servicio pagado true
+          servicioAguaPagado.aguaPagada = true;
+
+          //Actualizamos transacción del pago de servicio en el localStorage
+          localStorage.setItem("servicios", JSON.stringify(servicioAguaPagado));
+
+          break;
+        case 2:
+          //Desactivamos la option del dropdown
+          dropdownServicio.options[dropdownServicio.selectedIndex].disabled =
+            "true";
+
+          //Quitamos la selección
+          dropdownServicio.selectedIndex = 0;
+
+          //Removemos la clase para mostrar la cantidad
+          amountPlaceholder.classList.remove("show");
+
+          //Agregamos la clase para esconder la cantidad
+          amountPlaceholder.classList.add("hide");
+
+          //Cargamos el localStorage de lo que se ha pagado
+          let servicioEnergiaPagado = JSON.parse(
+            localStorage.getItem("servicios")
+          );
+
+          //Cambiamos a servicio pagado true
+          servicioEnergiaPagado.energiaPagada = true;
+
+          //Actualizamos transacción del pago de servicio en el localStorage
+          localStorage.setItem(
+            "servicios",
+            JSON.stringify(servicioEnergiaPagado)
+          );
+
+          break;
+        case 3:
+          //Desactivamos la option del dropdown
+          dropdownServicio.options[dropdownServicio.selectedIndex].disabled =
+            "true";
+
+          //Quitamos la selección
+          dropdownServicio.selectedIndex = 0;
+
+          //Removemos la clase para mostrar la cantidad
+          amountPlaceholder.classList.remove("show");
+
+          //Agregamos la clase para esconder la cantidad
+          amountPlaceholder.classList.add("hide");
+
+          //Cargamos el localStorage de lo que se ha pagado
+          let servicioTelefonoPagado = JSON.parse(
+            localStorage.getItem("servicios")
+          );
+
+          //Cambiamos a servicio pagado true
+          servicioTelefonoPagado.telefonoPagada = true;
+
+          //Actualizamos transacción del pago de servicio en el localStorage
+          localStorage.setItem(
+            "servicios",
+            JSON.stringify(servicioTelefonoPagado)
+          );
+
+          break;
+        case 4:
+          //Desactivamos la option del dropdown
+          dropdownServicio.options[dropdownServicio.selectedIndex].disabled =
+            "true";
+
+          //Quitamos la selección
+          dropdownServicio.selectedIndex = 0;
+
+          //Removemos la clase para mostrar la cantidad
+          amountPlaceholder.classList.remove("show");
+
+          //Agregamos la clase para esconder la cantidad
+          amountPlaceholder.classList.add("hide");
+
+          //Cargamos el localStorage de lo que se ha pagado
+          let servicioInternetPagado = JSON.parse(
+            localStorage.getItem("servicios")
+          );
+
+          //Cambiamos a servicio pagado true
+          servicioInternetPagado.internetPagada = true;
+
+          //Actualizamos transacción del pago de servicio en el localStorage
+          localStorage.setItem(
+            "servicios",
+            JSON.stringify(servicioInternetPagado)
+          );
+
+          break;
+
+        default:
+          break;
+      }
+
+      //Confirmación exitosa de pago de servicio
+      Swal.fire({
+        title: "Pago realizado",
+        text: `Has pagado correctamente $${datoMontoCantidadNumero} de tu servicio.`,
+        icon: "success",
+      });
+
+      //Actualizamos el localStorage de lo que se ha pagado
+    }
+  }
+
+  //////////////////////// FIN - Pagar Servicios ////////////////////////
 });
 
 //Cargar info de la cuenta
