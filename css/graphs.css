@@ -23,6 +23,11 @@ a:active {
   font-weight: bold;
 }
 
+.centered {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
 .dropdown-toggle {
   border-radius: 0;
   border-color: #151515;
