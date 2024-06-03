@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   // Comprobamos si el flag "transaccionesCargada2" ya existe en localStorage
+
   if (localStorage.getItem("transaccionesCargada2") === null) {
     // Si no existe, lo establecemos como "false"
     localStorage.setItem("transaccionesCargada2", "false");
@@ -84,15 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
       transacciones.forEach((transaccion) => {
         if (transaccion.tipo === "Deposito") {
           depositos=depositos+1;
-          console.log(depositos);
         } else if (
           transaccion.tipo === "Retiro"){
             retiros=retiros+1;
-            console.log(retiros);
             
           } else {
           pagos= pagos+1;
-          console.log(pagos);
         }
       });
 
@@ -100,10 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
       depositos = Number(depositos);
       retiros = Number(retiros);
       pagos = Number(pagos);
-      console.log(depositos);
-      console.log(retiros);
-      console.log(pagos);
-
       //Creamos el objeto
       let totalMovimientos = {
         depositos: depositos,
@@ -134,20 +128,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Pie Chart
 function initializeCharts() {
+  
   //Cargamos ingresos, egresos y saldo del localStorage
+
   let localtotalMovimientos = JSON.parse(
     localStorage.getItem("totalTransacciones")
   );
-  console.log(localtotalMovimientos);
 
   const deposit = document.getElementById("deposit");
-  console.log(localtotalMovimientos.depositos==null);
   deposit.textContent = Number(localtotalMovimientos.depositos);
   const withdraw = document.getElementById("withdraw");
-  console.log(localtotalMovimientos.retiros);
   withdraw.textContent =localtotalMovimientos.retiros;
   const pymt = document.getElementById("pymt");
-  console.log(localtotalMovimientos.pagos);
   pymt.textContent =localtotalMovimientos.pagos;
 
   //Traemos la data del localStorage del total de movimientos

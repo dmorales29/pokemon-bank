@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Cargar del localStorage el saldo real
   let totalMovimientos = JSON.parse(localStorage.getItem("totalMovimientos"));
+  let totalTransacciones = JSON.parse(localStorage.getItem("totalTransacciones"));
 
   //Carga del localStorage las transacciones
   let misTransacciones = JSON.parse(localStorage.getItem("misTransacciones"));
@@ -130,6 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
       //Suma de saldo anterior más el depósito realizado
       let nuevoSaldo = totalMovimientos.saldo + montoADepositar;
       totalMovimientos.saldo = nuevoSaldo;
+      
+      
 
       //Registro de transacción de depósito
       let nuevaTransaccion = {
@@ -152,6 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       //Asignamos el valor del ingreso en el localStorage
       totalMovimientos.ingresos = nuevoIngreso;
+      totalTransacciones.depositos +=1;
+      
 
       //Asignamos el valor del nuevo saldo en el localStorage
       totalMovimientos.saldo = nuevoSaldo;
@@ -160,6 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(
         "totalMovimientos",
         JSON.stringify(totalMovimientos)
+      );
+      localStorage.setItem(
+        "totalTransacciones",
+        JSON.stringify(totalTransacciones)
       );
 
       //Confirmación exitosa de Depósito
@@ -209,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //Resta del saldo anterior con el retiro realizado
       let nuevoSaldo = totalMovimientos.saldo - montoARetirar;
       totalMovimientos.saldo = nuevoSaldo;
-
+      totalTransacciones.retiros +=1;
       //Registro de transacción de retiro
       let nuevaTransaccion = {
         tipo: "Retiro",
@@ -240,6 +249,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "totalMovimientos",
         JSON.stringify(totalMovimientos)
       );
+      localStorage.setItem(
+        "totalTransacciones",
+        JSON.stringify(totalTransacciones)
+      );
+
 
       //Confirmación exitosa de Retiro
       Swal.fire({
@@ -336,6 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //Resta del saldo anterior con el pago realizado
       let nuevoSaldo = totalMovimientos.saldo - datoMontoCantidad;
       totalMovimientos.saldo = nuevoSaldo;
+      totalTransacciones.pagos +=1;
 
       //Convertimos el monto a tipo número
       let datoMontoCantidadNumero = Number(datoMontoCantidad);
@@ -369,6 +384,10 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(
         "totalMovimientos",
         JSON.stringify(totalMovimientos)
+      );
+      localStorage.setItem(
+        "totalTransacciones",
+        JSON.stringify(totalTransacciones)
       );
 
       //Limpiamos cantidad y bloqueamos la selección del servicio pagado
