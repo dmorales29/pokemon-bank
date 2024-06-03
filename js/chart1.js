@@ -67,11 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Convertir a booleano
   let flag = localStorage.getItem("transaccionesCargada") === "true";
-
   if (!flag) {
     function cargarData() {
       //Guardamos esas transacciones en el localStorage
-      localStorage.setItem("misTransacciones", JSON.stringify(transacciones));
+      localStorage.setItem("misTransacciones2", JSON.stringify(transacciones));
 
       //Asignamos los Ingresos, Egresos realizados de mis transacciones
       let ingresos = 0;
