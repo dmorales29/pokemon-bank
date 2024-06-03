@@ -20,8 +20,9 @@ function dataTableFormat() {
   misTransacciones
     .filter(
       (element) =>
-        new Date(element.fecha) >= new Date(inicio) &&
-        new Date(element.fecha) <= new Date(fin)
+        new Date(formatoDate(element.fecha)) >= new Date(formatoDate(inicio)) &&
+        new Date(formatoDate(element.fecha)) <= new Date(formatoDate(fin))
+        
     )
     .forEach((element) => {
       //crea una fila para cada una de las transacciones retrieved del localStorage   
