@@ -162,6 +162,9 @@ document.addEventListener("DOMContentLoaded", () => {
         JSON.stringify(totalMovimientos)
       );
 
+      //Nombre de la cuenta
+      let userStoredData = JSON.parse(localStorage.getItem("userData")).nombre;
+
       //Confirmación exitosa de Depósito
       Swal.fire({
         title: "Depósito realizado",
@@ -169,6 +172,14 @@ document.addEventListener("DOMContentLoaded", () => {
           2
         )} a tu cuenta.`,
         icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Imprimir Recibo",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+          createPDF(userStoredData, nuevaTransaccion);
+        }
       });
 
       //Limpiamos el input
@@ -241,6 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
         JSON.stringify(totalMovimientos)
       );
 
+      //Nombre de la cuenta
+      let userStoredData = JSON.parse(localStorage.getItem("userData")).nombre;
+
       //Confirmación exitosa de Retiro
       Swal.fire({
         title: "Retiro realizado",
@@ -248,6 +262,14 @@ document.addEventListener("DOMContentLoaded", () => {
           2
         )} de tu cuenta.`,
         icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Imprimir Recibo",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+          createPDF(userStoredData, nuevaTransaccion);
+        }
       });
 
       //Limpiamos el input
@@ -491,11 +513,22 @@ document.addEventListener("DOMContentLoaded", () => {
           break;
       }
 
+      //Nombre de la cuenta
+      let userStoredData = JSON.parse(localStorage.getItem("userData")).nombre;
+
       //Confirmación exitosa de pago de servicio
       Swal.fire({
         title: "Pago realizado",
         text: `Has pagado correctamente $${datoMontoCantidadNumero} de tu servicio.`,
         icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Imprimir Recibo",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+          createPDF(userStoredData, nuevaTransaccion);
+        }
       });
 
       //Actualizamos el localStorage de lo que se ha pagado
